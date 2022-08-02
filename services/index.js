@@ -180,7 +180,7 @@ export const getCategoryPost = async (slug) => {
 };
 
 export const submitComment = async (obj) => {
-   const result = await fetch('/api/comments', {
+   const result = await fetch(graphqlAPI + '/api/comments', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
