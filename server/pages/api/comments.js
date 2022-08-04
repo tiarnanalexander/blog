@@ -13,15 +13,15 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ comments)
+  "default": () => (/* binding */ asynchandler)
 });
 
 ;// CONCATENATED MODULE: external "graphql-request"
 const external_graphql_request_namespaceObject = require("graphql-request");
 ;// CONCATENATED MODULE: ./pages/api/comments.js
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
-async function comments(req, res) {
+const graphqlAPI = "https://api-eu-west-2.graphcms.com/v2/cl56x71wu47w501ug3c1dc2dp/master";
+async function asynchandler(req, res) {
     const graphQLClient = new external_graphql_request_namespaceObject.GraphQLClient(graphqlAPI, {
         headers: {
             authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`
@@ -29,16 +29,16 @@ async function comments(req, res) {
     });
     const query = external_graphql_request_namespaceObject.gql`
     mutation CreateComment($name: String!, $email: String!, $comment: String!, $slug: String!) {
-      createComment(data: {name: $name, email: $email, comment: $comment, post: { connect: {slug: $slug}}}) { id }
+      createComment(data: {name: $name, email: $email, comment: $comment, post: {connect: {slug: $slug}}}) { id }
     }
   `;
-    try {
-        const result = await graphQLClient.request(query, req.body);
-        return res.status(200).send(result);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
-    }
+    const result = await graphQLClient.request(query, {
+        name: req.body.name,
+        email: req.body.email,
+        comment: req.body.comment,
+        slug: req.body.slug
+    });
+    return res.status(200).send(result);
 };
 
 
