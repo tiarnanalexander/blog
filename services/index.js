@@ -179,19 +179,17 @@ export const getCategoryPost = async (slug) => {
   return result.postsConnection.edges;
 };
 
-// export const submitComment = async (obj) => {
-//    const result = await fetch('/api/comments', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(obj),
-//    })
+export const submitComment = async (obj) => {
+   const result = await fetch('/api/comments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+   })
 
-//    console.log(result.json())
-
-//    return result.json();
-// }
+   return result.json();
+}
 
 export const getFeaturedPosts = async () => {
   const query = gql`
