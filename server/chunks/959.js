@@ -118,12 +118,13 @@ html_react_parser__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__
 const Comments = ({ slug  })=>{
     const { 0: comments , 1: setComments  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        (0,_services__WEBPACK_IMPORTED_MODULE_4__/* .getComments */ .li)(slug).then((result)=>setComments(result));
-        return ()=>{};
+        (0,_services__WEBPACK_IMPORTED_MODULE_4__/* .getComments */ .li)(slug).then((result)=>{
+            setComments(result);
+        });
     }, []);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: comments.length > 0 && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "bg-white shadow-[0_10px_37px_-14px_rgba(0,0,0,0.3)] rounded-lg p-8 pb-12 mb-8",
+            className: "bg-white shadow-lg rounded-lg p-8 pb-12 mb-8",
             children: [
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h3", {
                     className: "text-xl mb-8 font-semibold border-b pb-4",
@@ -133,8 +134,7 @@ const Comments = ({ slug  })=>{
                         "Comments"
                     ]
                 }),
-                comments.map((comment)=>{
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                comments.map((comment, index)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: "border-b border-gray-100 mb-4 pb-4",
                         children: [
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
@@ -155,8 +155,7 @@ const Comments = ({ slug  })=>{
                                 children: (0,html_react_parser__WEBPACK_IMPORTED_MODULE_3__["default"])(comment.comment)
                             })
                         ]
-                    }, comment.createdAt);
-                })
+                    }, index))
             ]
         })
     });
@@ -1096,6 +1095,7 @@ const getComments = async (slug)=>{
      comments(where: { post: { slug: $slug } } ) {
       name
       createdAt
+      comment
      }
     }
   `;
