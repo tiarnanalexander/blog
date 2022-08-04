@@ -222,6 +222,7 @@ export const getComments = async (slug) => {
      comments(where: { post: { slug: $slug } } ) {
       name
       createdAt
+      comment
      }
     }
   `
